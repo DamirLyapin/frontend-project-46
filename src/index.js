@@ -1,5 +1,18 @@
-const genDiff = (filepath1, filepath2) => {
-  return `Comparing ${filepath1} and ${filepath2}`;
-};
+import { readFileSync } from 'fs'
+import path from 'path'
 
-export default genDiff;
+const getFormat = (filepath) => {
+  const formatWithDot = path.extname(filepath).toLowerCase()
+  return formatWithDot.slice(1)
+}
+
+const parseFile = (filepath) => {
+  const absoluteParh = path.resolve(process.cwd(), filepath)
+  const content = readFileSync(absoluteParh, 'utf-8')
+  const format = getFormat(filepath)
+  if (format === 'json') {
+    return JSON.parse(content)
+  }
+}
+
+export default parseFile;

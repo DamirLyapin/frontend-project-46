@@ -1,5 +1,5 @@
 import { Command } from 'commander';
-import genDiff from './index.js';
+import parseFile from './index.js';
 
 const program = new Command();
 
@@ -8,11 +8,16 @@ program
   .description('Compares two configuration files and shows a difference.')
   .version('1.0.0')
   .option('-f, --format [type]', 'output format')
-  .argument('<filepath1>', 'path to first file')
-  .argument('<filepath2>', 'path to second file')
+  .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
-    const diff = genDiff(filepath1, filepath2);
-    console.log(diff);
+    try {
+      const file1 = parseFile(filepath1)
+      const file2 = parseFile(filepath2)
+      console.log(`File 1: ${file1}`)
+      console.log(`File 2: ${file2}`)
+    } catch(e) {
+      console.error(`Error: ${e.message}`)
+    }
   });
 
 export default program
