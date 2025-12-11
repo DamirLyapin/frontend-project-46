@@ -1,5 +1,5 @@
-import { Command } from 'commander';
-import parseFile from './index.js';
+import { Command } from 'commander'
+import parseFile from './index.js'
 
 const sortFiles = (file) => {
   const entries = Object.entries(file)
@@ -15,29 +15,32 @@ const sortFiles = (file) => {
   return Object.fromEntries(sortedEntries)
 }
 
-const genDiff = (data1, data2) => {
+export const genDiff = (data1, data2) => {
   let result = '{\n'
   const sortedData1 = sortFiles(data1)
   const sortedData2 = sortFiles(data2)
   const allKeys = [
     ...new Set([
       ...Object.keys(sortedData1),
-      ...Object.keys(sortedData2)
-    ])
+      ...Object.keys(sortedData2),
+    ]),
   ].sort()
-  allKeys.forEach(key => {
+  allKeys.forEach((key) => {
     const value1 = sortedData1[key]
     const value2 = sortedData2[key]
     if (value1 !== undefined && value2 !== undefined) {
       if (value1 === value2) {
         result += `  ${key}: ${value1}\n`
-      } else {
+      }
+      else {
         result += `- ${key}: ${value1}\n`
         result += `+ ${key}: ${value2}\n`
       }
-    } else if (value1 !== undefined) {
+    }
+    else if (value1 !== undefined) {
       result += `- ${key}: ${value1}\n`
-    } else {
+    }
+    else {
       result += `+ ${key}: ${value2}\n`
     }
   })
@@ -45,7 +48,7 @@ const genDiff = (data1, data2) => {
   return result
 }
 
-const program = new Command();
+const program = new Command()
 
 program
   .name('gendiff')
@@ -58,9 +61,10 @@ program
       const file1 = parseFile(filepath1)
       const file2 = parseFile(filepath2)
       console.log(genDiff(file1, file2))
-    } catch(e) {
+    }
+    catch (e) {
       console.error(`Error: ${e.message}`)
     }
-  });
+  })
 
 export default program

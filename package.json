@@ -10,7 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/DamirLyapin/frontend-project-46.git"
   },
-  "type":"module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "type": "module",
   "license": "ISC",
   "author": "",
   "main": "index.js",
@@ -18,9 +23,17 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-	"gendiff": "bin/gendiff.js"
+    "gendiff": "bin/gendiff.js"
   },
   "dependencies": {
     "commander": "^14.0.2"
+  },
+  "devDependencies": {
+    "@eslint/create-config": "^1.11.0",
+    "@eslint/js": "^9.39.1",
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "jest": "^30.2.0"
   }
 }

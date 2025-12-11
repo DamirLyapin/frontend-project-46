@@ -15,4 +15,4 @@ const parseFile = (filepath) => {
   }
 }
 
-export default parseFile;
+export default parseFile
