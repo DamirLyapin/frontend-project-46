@@ -1,7 +1,22 @@
 // @ts-check
 
 import { expect, test } from '@jest/globals'
-import { genDiff } from '../src/cli.js'
+import { genDiff } from '../src/index.js'
+import parseFile from '../src/parsers.js'
+
+test('parseFile', () => {
+    const result1 = parseFile('../frontend-project-46/__fixtures__/file1.json')
+    const expected1 = {
+        "host": "hexlet.io",
+        "timeout": 50,
+        "proxy": "123.234.53.22",
+        "follow": false
+    }
+    expect(result1).toEqual(expected1)
+    const result2 = parseFile('../frontend-project-46/__fixtures__/file1.json')
+    const expected2 = {}
+    expect(result2).toEqual(expected2)
+})
 
 test('genDiff', () => {
     const file1 = {
