@@ -1,47 +1,33 @@
-const sortFiles = (file) => {
-  const entries = Object.entries(file)
-  const sortedEntries = entries.sort((a, b) => {
-    if (a[0] < b[0]) {
-      return -1
-    }
-    if (a[0] > b[0]) {
-      return 1
-    }
-    return 0
-  })
-  return Object.fromEntries(sortedEntries)
-}
+import _ from 'lodash'
 
 export const genDiff = (data1, data2) => {
-  let result = '{\n'
-  const sortedData1 = sortFiles(data1)
-  const sortedData2 = sortFiles(data2)
-  const allKeys = [
-    ...new Set([
-      ...Object.keys(sortedData1),
-      ...Object.keys(sortedData2),
-    ]),
-  ].sort()
-  allKeys.forEach((key) => {
-    const value1 = sortedData1[key]
-    const value2 = sortedData2[key]
-    if (value1 !== undefined && value2 !== undefined) {
-      if (value1 === value2) {
-        result += `  ${key}: ${value1}\n`
-      }
-      else {
-        result += `- ${key}: ${value1}\n`
-        result += `+ ${key}: ${value2}\n`
+  const keys = _.union(_.keys(data1), _.keys(data2))
+  const sortedKeys = _.sortBy(keys)
+  return sortedKeys.map((key) => {
+    if (!_.has(data2, key)) {
+      return { key, type: 'removed', value: data1[key]}
+    }
+    if (!_.has(data1, key)) {
+      return { key, type: 'added', value: data2[key]}
+    }
+    const value1 = data1[key]
+    const value2 = data2[key]
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
+      return {
+        key, 
+        type: 'nested',
+        children: genDiff(value1, value2)
       }
     }
-    else if (value1 !== undefined) {
-      result += `- ${key}: ${value1}\n`
+    if (!_.isEqual(value1, value2)) {
+      return {
+        key,
+        type: 'changed',
+        value1,
+        value2
+      }
     }
-    else {
-      result += `+ ${key}: ${value2}\n`
-    }
+    return { key, type: 'unchanged', value: value1}
   })
-  result += '}'
-  return result
 }
 

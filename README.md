@@ -12,3 +12,6 @@ badge about eslint: [![eslint check](https://github.com/DamirLyapin/frontend-pro
 
 demonstration of work with yaml:
  https://asciinema.org/a/R9gIa1fjtBTCfBjDYejAJus5a
+
+demonstration of stylish working:
+https://asciinema.org/a/cOnY2DveXMoBtd6joIXp59qWz
