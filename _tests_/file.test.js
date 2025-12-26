@@ -141,3 +141,10 @@ test('stylish', () => {
     }`
     expect(nestedResult).toEqual(nestedExpect)
 })
+
+test('plain', () => {
+    const nestedFile1 = parseFile('../frontend-project-46/__fixtures__/file1Recurs.json')
+    const nestedFile2 = parseFile('../frontend-project-46/__fixtures__/file2Recurs.json')
+    const nestedResult = stylish(nestedFile1, nestedFile2)
+    const expected = ``
+})

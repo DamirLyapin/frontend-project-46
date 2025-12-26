@@ -12,8 +12,6 @@ const formatValue = (value, depth = 1) => {
     });
     return `{\n${formattedEntries.join('\n')}\n${bracketIndent}}`;
   }
-  
-  // Для примитивных типов
   if (typeof value === 'string') {
     return value;
   }

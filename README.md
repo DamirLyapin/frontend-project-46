@@ -15,3 +15,6 @@ demonstration of work with yaml:
 
 demonstration of stylish working:
 https://asciinema.org/a/cOnY2DveXMoBtd6joIXp59qWz
+
+demonstration of working plain formatter:
+ https://asciinema.org/a/cnABjBhZwUPRHl67GP26N7Ac7

@@ -1,7 +1,6 @@
 import { Command } from 'commander'
 import parseFile from './parsers.js'
-import { genDiff } from './index.js'
-import { stylish } from './formaters.js'
+import genDiff from './index.js'
 
 const program = new Command()
 
@@ -15,16 +14,10 @@ program
     try {
       const file1 = parseFile(filepath1)
       const file2 = parseFile(filepath2)
-      const diff = genDiff(file1, file2)
       const options = program.opts()
       const format = options.format
-      let result
-      if (format === 'stylish') {
-        result = stylish(diff)
-      } else {
-        result = stylish(diff)
-      }
-      console.log(result)
+      const diff = genDiff(file1, file2, format)
+      console.log(diff)
     }
     catch (e) {
       console.error(`Error: ${e.message}`)
