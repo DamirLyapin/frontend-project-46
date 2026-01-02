@@ -1,14 +1,28 @@
-install:
+install: deps-install
+	npx simple-git-hooks
+
+run:
+	bin/nodejs-package.js 10
+
+deps-install:
 	npm ci
 
-gendiff:
-	node bin/gendiff.js
+deps-update:
+	npx ncu -u
 
-publish:
-	npm publish --dry-run
+test:
+	npm test
+
+test-coverage:
+	npm test -- --coverage
 
 lint:
 	npx eslint .
 
-test:
-	npm test
+lint-fix:
+	npx eslint . --fix
+
+publish:
+	npx release-it
+
+.PHONY: test
