@@ -27,26 +27,26 @@ export const stylish = (diff, depth = 1) => {
     const { key, type } = node
 
     switch (type) {
-      case 'nested':
-        return `${currentIndent}  ${key}: ${stylish(node.children, depth + 1)}`
+    case 'nested':
+      return `${currentIndent}  ${key}: ${stylish(node.children, depth + 1)}`
 
-      case 'added':
-        return `${currentIndent}+ ${key}: ${formatValue(node.value, depth + 1)}`
+    case 'added':
+      return `${currentIndent}+ ${key}: ${formatValue(node.value, depth + 1)}`
 
-      case 'removed':
-        return `${currentIndent}- ${key}: ${formatValue(node.value, depth + 1)}`
+    case 'removed':
+      return `${currentIndent}- ${key}: ${formatValue(node.value, depth + 1)}`
 
-      case 'changed':
-        return [
-          `${currentIndent}- ${key}: ${formatValue(node.value1, depth + 1)}`,
-          `${currentIndent}+ ${key}: ${formatValue(node.value2, depth + 1)}`,
-        ].join('\n')
+    case 'changed':
+      return [
+        `${currentIndent}- ${key}: ${formatValue(node.value1, depth + 1)}`,
+        `${currentIndent}+ ${key}: ${formatValue(node.value2, depth + 1)}`,
+      ].join('\n')
 
-      case 'unchanged':
-        return `${currentIndent}  ${key}: ${formatValue(node.value, depth + 1)}`
+    case 'unchanged':
+      return `${currentIndent}  ${key}: ${formatValue(node.value, depth + 1)}`
 
-      default:
-        return ''
+    default:
+      return ''
     }
   })
 
