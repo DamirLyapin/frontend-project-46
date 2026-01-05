@@ -1,5 +1,4 @@
 import { Command } from 'commander'
-import parseFile from './parsers.js'
 import genDiff from './index.js'
 
 const program = new Command()
