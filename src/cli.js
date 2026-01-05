@@ -15,7 +15,8 @@ program
       const format = options.format
       const diff = genDiff(filepath1, filepath2, format)
       console.log(diff)
-    } catch (e) {
+    }
+    catch (e) {
       console.error(`Error: ${e.message}`)
       process.exit(1)
     }

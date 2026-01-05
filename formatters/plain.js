@@ -26,23 +26,23 @@ const iter = (diff, path = '') => {
     const propertyPath = buildPath(path, key)
 
     switch (type) {
-    case 'nested':
-      return iter(node.children, propertyPath)
+      case 'nested':
+        return iter(node.children, propertyPath)
 
-    case 'added':
-      return `Property '${propertyPath}' was added with value: ${formatValue(node.value)}`
+      case 'added':
+        return `Property '${propertyPath}' was added with value: ${formatValue(node.value)}`
 
-    case 'removed':
-      return `Property '${propertyPath}' was removed`
+      case 'removed':
+        return `Property '${propertyPath}' was removed`
 
-    case 'changed':
-      return `Property '${propertyPath}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`
+      case 'changed':
+        return `Property '${propertyPath}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`
 
-    case 'unchanged':
-      return []
+      case 'unchanged':
+        return []
 
-    default:
-      return []
+      default:
+        return []
     }
   })
 
