@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import getFormatter from '../formatters/index.js'
+import parseFile from './parsers.js'
 
 const buildDiff = (data1, data2) => {
   const keys = _.union(_.keys(data1), _.keys(data2))
@@ -39,7 +40,9 @@ const buildDiff = (data1, data2) => {
 }
 
 export const genDiff = (data1, data2, formatName = 'stylish') => {
-  const diff = buildDiff(data1, data2)
+  const file1 = parseFile(data1)
+  const file2 = parseFile(data2)
+  const diff = buildDiff(file1, file2)
   const formatter = getFormatter(formatName)
   return formatter(diff)
 }

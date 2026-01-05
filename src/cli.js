@@ -12,11 +12,9 @@ program
   .arguments('<filepath1> <filepath2>')
   .action((filepath1, filepath2) => {
     try {
-      const file1 = parseFile(filepath1)
-      const file2 = parseFile(filepath2)
       const options = program.opts()
       const format = options.format
-      const diff = genDiff(file1, file2, format)
+      const diff = genDiff(filepath1, filepath2, format)
       console.log(diff)
     } catch (e) {
       console.error(`Error: ${e.message}`)
